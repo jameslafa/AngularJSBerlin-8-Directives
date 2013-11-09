@@ -4,13 +4,19 @@ angular.module('AngularJsBerlin8App', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ezfb'
 ])
-  .config ['$routeProvider', ($routeProvider) ->
+  .config ['$routeProvider', '$FBProvider', ($routeProvider, $FBProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
       .otherwise
         redirectTo: '/'
+
+
+    $FBProvider.setInitParams(
+      appId: '256438047840331'
+    )
   ]
