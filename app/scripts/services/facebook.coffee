@@ -25,7 +25,6 @@ angular.module('AngularJsBerlin8App')
           if 'connected' == loginStatus.status
             # User is connected to Facebook and already accepted to
             # install our application.
-
             # We extract the userID in case we need it for later
             facebook.userID = loginStatus.authResponse.userID
 
@@ -39,7 +38,7 @@ angular.module('AngularJsBerlin8App')
             # User is not connected to Facebook or did not installed our
             # application yet. Calling login method will open a pop-up
             # to ask the user to install the application.
-            $FB.login(null).then(
+            $FB.login(null, {scope: 'email,friends_photo_video_tags,friends_photos,user_friends'}).then(
               (loginStatus) ->
                 if 'connected' == loginStatus.status
                   # Now the user is connected, we extract his userID and
@@ -84,10 +83,42 @@ angular.module('AngularJsBerlin8App')
         (friendsList) ->
           # We know have the friends list, we can resolve the deferred
           # giving his friends list
-          deferred.resolve(friendsList.data)
+          friends = _.sortBy friendsList.data, (friend) ->
+            friend.name
+
+          deferred.resolve(friends)
       )
 
       return deferred.promise
+
+    #
+    # Return the user name and a list of public pictures
+    #
+    facebook.publicServices.getFriendInfos = (friendId) ->
+      deferred = $q.defer()
+
+      facebook.publicServices.login()
+      .then(
+        (success) ->
+          # If user is logged in, request pictures and name
+          $FB.api("/#{friendId}", {fields: 'photos,name'})
+      )
+      .then(
+        (data) ->
+          photos = []
+
+          # Loop on result and add picture to the list
+          if data and data.photos and data.photos.data
+            _.each data.photos.data, (photo) ->
+              photos.push(photo.picture)
+
+          # Resolve the deferred with the result
+          deferred.resolve({name: data.name, photos: photos})
+      )
+
+      return deferred.promise
+
+
 
     # Return the list of public exposed services
     return facebook.publicServices

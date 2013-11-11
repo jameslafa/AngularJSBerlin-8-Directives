@@ -1,0 +1,14 @@
+<div class="menu-friends clearfix row">
+  <div class="list">
+    <div class="search col-xs-12">
+      <input type="search" class="form-control" ng-model="q" placeholder="Filter names"></input>
+    </div>
+
+    <div class="users">
+      <a ng-href="#/user/{{user.id}}" ng-repeat="user in friendsList | filter:{name: q}" class="well well-sm col-xs-12">
+        <img ng-src="https://graph.facebook.com/{{user.id}}/picture?width=30&height=30"></img>
+        {{user.name}}
+      </a>
+    </div>
+  </div>
+</div>

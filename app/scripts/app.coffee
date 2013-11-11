@@ -7,9 +7,12 @@ angular.module('AngularJsBerlin8App', [
   'ngRoute',
   'ezfb'
 ])
-  .config ['$routeProvider', '$FBProvider', ($routeProvider, $FBProvider) ->
+  .config ['$routeProvider', '$FBProvider', '$locationProvider', ($routeProvider, $FBProvider, $locationProvider) ->
     $routeProvider
       .when '/',
+        templateUrl: 'views/main.html'
+        controller: 'MainCtrl'
+      .when '/user/:userId',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
       .otherwise
@@ -19,4 +22,6 @@ angular.module('AngularJsBerlin8App', [
     $FBProvider.setInitParams(
       appId: '256438047840331'
     )
+
+    $locationProvider.html5Mode(false)
   ]

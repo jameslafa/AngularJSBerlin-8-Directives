@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -25,7 +25,15 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <a class="navbar-brand" href="#">AngularJS Berlin #8 : Create a directives</a>
+            <p class="navbar-text navbar-right">By James Lafa</p>
+        </nav>
+        <div menu-friends class="col-md-4"></div>
+        <div class="content col-md-8" ng-view=""></div>
+    </div>
 
 
     <script src="bower_components/jquery/jquery.js"></script>
@@ -59,6 +67,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/facebook.js"></script>
+    <script src="scripts/directives/menuFriends.js"></script>
     <!-- endbuild -->
   </body>
 </html>

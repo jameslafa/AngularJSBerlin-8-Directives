@@ -1,10 +1,13 @@
 'use strict'
 
 angular.module('AngularJsBerlin8App')
-  .controller 'MainCtrl', ['$scope', ($scope) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
+  .controller 'MainCtrl', ['$scope', 'Facebook', '$routeParams', ($scope, Facebook, $routeParams) ->
+    $scope.name = ""
+    $scope.photos = null
+
+    Facebook.getFriendInfos($routeParams.userId).then(
+      (infos) ->
+        $scope.name = infos.name
+        $scope.photos = infos.photos
+    )
   ]
