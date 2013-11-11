@@ -1,5 +1,7 @@
-<h1>{{name}}</h1>
-<div class="photos row">
-  <img src="{{photo}}" class="col-md-4 ng-cloak" ng-repeat="photo in photos"/>
-  <div class="alert alert-danger col-md-8 col-md-offset-2" ng-if="photos.length == 0">This user has no picture!</div>
+<div ng-show="name">
+  <h1>{{name}}</h1>
+  <div class="photos row">
+    <img src="{{photo}}" class="col-md-4 ng-cloak" ng-repeat="photo in photos"/>
+    <div class="alert alert-danger col-md-8 col-md-offset-2" ng-if="photos.length == 0">This user has no picture!</div>
+  </div>
 </div>

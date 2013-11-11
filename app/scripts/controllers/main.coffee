@@ -2,7 +2,7 @@
 
 angular.module('AngularJsBerlin8App')
   .controller 'MainCtrl', ['$scope', 'Facebook', '$routeParams', ($scope, Facebook, $routeParams) ->
-    $scope.name = ""
+    $scope.name = null
     $scope.photos = null
 
     Facebook.getFriendInfos($routeParams.userId).then(
